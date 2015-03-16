@@ -4,9 +4,21 @@ from __future__ import absolute_import, division, print_function, unicode_litera
 
 import copy
 
-from django.views.generic.base import TemplateResponseMixin, ContextMixin, View
+from django.views.generic.base import TemplateResponseMixin, View
 
 from .rendering import render_to_pdf_response
+
+
+class ContextMixin(object):
+    """
+    An equivalent of Django 1.5 default context mixin. Added here for backward
+    compatibility with Django 1.4
+    """
+
+    def get_context_data(self, **kwargs):
+        if 'view' not in kwargs:
+            kwargs['view'] = self
+        return kwargs
 
 
 class PDFTemplateResponseMixin(TemplateResponseMixin):
