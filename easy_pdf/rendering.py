@@ -61,7 +61,7 @@ def html_to_pdf(content, encoding="utf-8",
     src = BytesIO(content.encode(encoding))
     dest = BytesIO()
 
-    pdf = pisa.pisaDocument(src, dest, encoding=encoding,
+    pdf = pisa.pisaDocument(src, dest, encoding=encoding, default_css='',
                             link_callback=link_callback, **kwargs)
     if pdf.err:
         logger.error("Error rendering PDF document")
